@@ -1,0 +1,17 @@
+<script src="socket.io.js"></script>
+<form>
+<input id="message" placeholder="Enter message">
+<input type="submit" value="Send">
+</form>
+
+<script>
+	var server = "http://51.79.141.136:3000";
+	var io = io(server);
+	
+	function sendMessage() {
+		var message = document.getElementById("message");
+		io.emit("new_message", "Bismillah, hello");
+	io.on("new_message", function (data) {
+		console.log("Server says: ", data);
+	});
+</script>
