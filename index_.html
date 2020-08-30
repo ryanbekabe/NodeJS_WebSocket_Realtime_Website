@@ -1,4 +1,5 @@
 <script src="socket.io.js"></script>
+<script src="jquery-3.5.1.js"></script>
 <form onsubmit="return sendMessage();">
 <input id="message" placeholder="Enter message">
 <input type="submit" value="Send">
@@ -14,6 +15,22 @@
 		io.emit("new_message", message.value);
 		return false;
 	}
+	
+	$.ajax({
+		url: server + "/get_messages",
+		method: "GET",
+		success: function (response) {
+			console.log(response);
+			var messages = document.getElementById("messages");
+			var data = JSON.parse(response);
+			for (var a = 0; a < data.length; a++) {
+				var li = document.createElement("li");
+				li.innerHTML = data[a].message;
+				messages.appendChild(li);
+			}
+		}
+	});
+		
 	io.on("new_message", function (data) {
 		console.log("Server says: ", data);
 		var li = document.createElement("li");
