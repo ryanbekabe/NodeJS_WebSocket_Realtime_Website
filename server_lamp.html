@@ -1,0 +1,26 @@
+<script src="socket.io.js"></script>
+<script src="jquery-3.5.1.js"></script>
+<form onsubmit="return sendMessage();">
+<input id="message" placeholder="Enter message">
+<input type="submit" value="Send">
+</form>
+<ul id="messages"></ul>
+<script>
+	var server = "http://51.79.141.136:3000";
+	var io = io(server);
+	function sendMessage() {
+		var message = document.getElementById("message");
+		io.emit("new_message", message.value);
+		// alert("2" + message.value);
+		return false;
+	}
+	io.on("new_message", function (data) {
+		console.log("Server says: ", data);
+		var li = document.createElement("li");
+		li.id = "message-" + data;
+		li.innerHTML = data;
+		li.innerHTML += data ;
+		var messages = document.getElementById("messages");
+		messages.appendChild(li);
+	});
+</script>

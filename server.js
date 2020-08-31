@@ -31,12 +31,13 @@ io.on("connection", function (socket) {
 	socket.on("new_message", function (data) {
 		console.log("Client says: ", data);
 		connection.query("INSERT INTO messages (message) VALUES ('" + data + "')", function(error, result) {});
-			io.emit("new_message", {id: result.insertId, message: data});
+			io.emit("new_message", {message: data});
 		});
 });
 
 app.get("/get_messages", function (request, result) {
 	connection.query("SELECT * FROM messages", function (error, messages) {
+//	connection.query("SELECT * FROM messages ORDER BY id DESC LIMIT 1", function (error, messages) {
 		result.end(JSON.stringify(messages));
 	});
 });
