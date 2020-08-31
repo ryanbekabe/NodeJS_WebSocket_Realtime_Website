@@ -15,11 +15,11 @@
 		return false;
 	}
 	io.on("new_message", function (data) {
-		console.log("Server " + socket.id + " says: ", data);
+		console.log("Server says: ", data);
 		var li = document.createElement("li");
 		li.id = "message-" + data;
-		li.innerHTML = data;
-		li.innerHTML += socket.id + ": " + data ;
+		li.innerHTML = "";
+		li.innerHTML += data ;
 		var messages = document.getElementById("messages");
 		messages.appendChild(li);
 	});

@@ -12,7 +12,7 @@ io.on("connection", function (socket) {
 	console.log("User connected ", socket.id);
 	socket.on("new_message", function (data) {
 		console.log("Client " + socket.id + " says: ", data);
-		io.emit("new_message", socket.id, data);
+		io.emit("new_message", data);
 		// alert("1" + data);
 	});
 
