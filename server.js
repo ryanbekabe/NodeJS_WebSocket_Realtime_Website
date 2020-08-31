@@ -1,4 +1,4 @@
-console.log("Server JS NodeJS https://www.youtube.com/watch?v=cXQGJ_8QYK0")
+console.log("Server JS NodeJS https://www.youtube.com/watch?v=cXQGJ_8QYK0 | https://adnan-tech.com/realtime-web-based-chat-in-node-js-mysql/")
 var express = require("express")
 var app = express();
 app.use(function (request, result, next) {
@@ -31,7 +31,7 @@ io.on("connection", function (socket) {
 	socket.on("new_message", function (data) {
 		console.log("Client says: ", data);
 		connection.query("INSERT INTO messages (message) VALUES ('" + data + "')", function(error, result) {});
-			io.emit("new_message", {message: data});
+			io.emit("new_message", {id: result.insertId, message: data});
 		});
 });
 

@@ -27,7 +27,7 @@
 				var li = document.createElement("li");
 				li.id = "message-" + data[a].id;
 				li.innerHTML = data[a].message;
-				li.innerHTML += "<button data-id='" + data[a].id + "' onclick='deleteMessage(this);'>Delete 1</button>";
+				li.innerHTML += "<button data-id='" + data[a].id + "' onclick='deleteMessage(this);'> Delete 1</button>";
 				messages.appendChild(li);
 			}
 		}
@@ -48,7 +48,7 @@
 		var li = document.createElement("li");
 		li.id = "message-" + data.id;
 		li.innerHTML = data.message;
-		li.innerHTML += "<button data-id='" + data.id + "' onclick='deleteMessage(this);'>Delete 2</button>";
+		li.innerHTML += "<button data-id='" + data.id + "' onclick='deleteMessage(this);'> Delete 2</button>";
 		var messages = document.getElementById("messages");
 		messages.appendChild(li);
 	});
