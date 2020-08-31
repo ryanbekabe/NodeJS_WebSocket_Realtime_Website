@@ -21,13 +21,18 @@ connection.connect(function (error) {
 });
 
 io.on("connection", function (socket) {
-	console.log("User: ", socket.id);
+	console.log("User connected ", socket.id);
+	
+	socket.on("delete_message", function (messageId) {
+		connection.query("DELETE FROM messages WHERE id = '" + messageId + "'", function (error, result) {});
+		io.emit("delete_message", messageId);
+		});
 	
 	socket.on("new_message", function (data) {
 		console.log("Client says: ", data);
-		io.emit("new_message", data);
 		connection.query("INSERT INTO messages (message) VALUES ('" + data + "')", function(error, result) {});
-	});
+			io.emit("new_message", {message: data});
+		});
 });
 
 app.get("/get_messages", function (request, result) {
