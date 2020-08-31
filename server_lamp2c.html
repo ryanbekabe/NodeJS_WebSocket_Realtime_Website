@@ -14,13 +14,24 @@
 		// alert("2" + message.value);
 		return false;
 	}
+	function clear(el) {
+		el.parentNode.replaceChild(el.cloneNode(false), el);
+	}
+	
 	io.on("new_message", function (data) {
 		console.log("Server says: ", data);
-		var li = document.createElement("li");
+		document.body.innerHTML = "";
+		var para = document.createElement("P");               // Create a <p> element
+		para.innerText = data;               // Insert text
+		document.body.appendChild(para);                      // Append <p> to <body>
+
+/* 		var li = document.createElement("li");
+		li.id = "";
 		li.id = "message-" + data;
-		li.innerHTML = "";
-		li.innerHTML += data + '<img id="myImage" src="' + data + '" style="width:100px">';
+		// li.innerHTML = "";
+		// li.innerHTML += data + '<img id="myImage" src="' + data + '" style="width:100px">';
+		li.innerHTML = '<img id="myImage" src="' + data + '" style="width:100px">';
 		var messages = document.getElementById("messages");
 		messages.appendChild(li);
-	});
+ */	});
 </script>
